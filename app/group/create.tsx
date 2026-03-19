@@ -1,8 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-<<<<<<< HEAD
 import * as Haptics from 'expo-haptics';
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 import { useRouter } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { Alert, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
@@ -57,10 +54,7 @@ export default function CreateGroupScreen() {
   const addMember = () => {
     const trimmed = memberName.trim();
 
-<<<<<<< HEAD
     void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
     if (!trimmed) {
       return;
     }
@@ -78,10 +72,7 @@ export default function CreateGroupScreen() {
   };
 
   const removeMember = (memberId: string) => {
-<<<<<<< HEAD
     void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
     setMembers((current) => {
       const target = current.find((member) => member.id === memberId);
 
@@ -117,10 +108,7 @@ export default function CreateGroupScreen() {
 
     try {
       setLoading(true);
-<<<<<<< HEAD
       void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
       await createGroup(group);
       router.replace('/');
     } catch (error) {
@@ -156,14 +144,10 @@ export default function CreateGroupScreen() {
             return (
               <Pressable
                 key={entry}
-<<<<<<< HEAD
                 onPress={() => {
                   void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                   setEmoji(entry);
                 }}
-=======
-                onPress={() => setEmoji(entry)}
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
                 style={[styles.emojiButton, selected && styles.emojiButtonSelected]}
               >
                 <Text style={styles.emojiLabel}>{entry}</Text>

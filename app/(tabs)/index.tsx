@@ -1,14 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
-<<<<<<< HEAD
 import * as Haptics from 'expo-haptics';
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 import { useRouter } from 'expo-router';
 import { useRef } from 'react';
 import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { MemberAvatar } from '../../components/MemberAvatar';
-import { EmptyState, PrimaryButton, Screen, SectionTitle } from '../../components/ui';
+import { EmptyState, Screen, SectionTitle } from '../../components/ui';
 import { theme } from '../../constants/theme';
 import { useApp } from '../../context/AppProvider';
 import { getGroupTotalSpent } from '../../services/balanceService';
@@ -18,7 +15,7 @@ import { isCurrentUserName } from '../../utils/profile';
 const getGreeting = () => {
   const hour = new Date().getHours();
   if (hour < 12) {
-    return 'Buenos días';
+    return 'Buenos dias';
   }
   if (hour < 19) {
     return 'Buenas tardes';
@@ -111,10 +108,60 @@ function GroupCard({
   );
 }
 
+function CreateGroupCard({ onPress }: { onPress: () => void }) {
+  const scale = useRef(new Animated.Value(1)).current;
+
+  const onPressIn = () => {
+    Animated.spring(scale, {
+      toValue: 0.98,
+      useNativeDriver: true,
+      speed: 22,
+      bounciness: 0,
+    }).start();
+  };
+
+  const onPressOut = () => {
+    Animated.spring(scale, {
+      toValue: 1,
+      useNativeDriver: true,
+      speed: 20,
+      bounciness: 0,
+    }).start();
+  };
+
+  return (
+    <Animated.View style={{ transform: [{ scale }] }}>
+      <Pressable
+        onPress={onPress}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        style={[styles.groupCard, styles.createGroupCard]}
+      >
+        <View style={styles.createGroupRow}>
+          <View style={styles.createGroupIcon}>
+            <Ionicons color={theme.colors.textPrimary} name="add" size={28} />
+          </View>
+          <View style={styles.groupMeta}>
+            <Text style={styles.groupName}>Crear grupo</Text>
+            <Text style={styles.groupSub}>Empeza un nuevo grupo para dividir gastos.</Text>
+          </View>
+        </View>
+
+        <Ionicons color={theme.colors.textSecondary} name="chevron-forward" size={18} />
+      </Pressable>
+    </Animated.View>
+  );
+}
+
 export default function GroupsScreen() {
   const router = useRouter();
   const { groups, isReady, profile } = useApp();
   const currentUserName = profile ? `${profile.name} ${profile.lastName}`.trim() : null;
+
+  const handleCreateGroup = () => {
+    void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    router.push('/group/create');
+  };
 
   if (!isReady) {
     return (
@@ -138,25 +185,13 @@ export default function GroupsScreen() {
         subtitle="Todo lo compartido en un solo lugar, listo para escanear, cargar y saldar."
       />
 
-      {groups.length === 0 ? (
-        <View style={styles.emptyWrap}>
-          <EmptyState icon="💸" title="No hay grupos todavía" message="Creá tu primer grupo para empezar" />
-<<<<<<< HEAD
-          <PrimaryButton label="Crear grupo" onPress={() => {
-            void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            router.push('/group/create');
-          }} />
-=======
-          <PrimaryButton label="Crear grupo" onPress={() => router.push('/group/create')} />
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
-        </View>
-      ) : (
-        groups.map((group) => (
+      <View style={styles.groupsList}>
+        {groups.map((group) => (
           <GroupCard
             key={group.id}
             emoji={group.emoji}
             title={group.name}
-            subtitle={`${group.members.length} personas · ${group.expenses.length} gastos`}
+            subtitle={`${group.members.length} personas - ${group.expenses.length} gastos`}
             amount={formatARS(getGroupTotalSpent(group))}
             members={group.members}
             currentUserName={
@@ -164,27 +199,32 @@ export default function GroupsScreen() {
                 ? currentUserName
                 : null
             }
-<<<<<<< HEAD
             onPress={() => {
               void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
               router.push(`/group/${group.id}`);
             }}
-=======
-            onPress={() => router.push(`/group/${group.id}`)}
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
           />
-        ))
-      )}
+        ))}
+
+        <CreateGroupCard onPress={handleCreateGroup} />
+      </View>
+
+      {groups.length === 0 ? (
+        <View style={styles.emptyWrap}>
+          <EmptyState
+            icon="💸"
+            title="No hay grupos todavia"
+            message="Crea tu primer grupo para empezar"
+          />
+        </View>
+      ) : null}
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   content: {
-<<<<<<< HEAD
     paddingTop: 0,
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
     paddingBottom: 120,
     gap: theme.spacing.md,
   },
@@ -198,11 +238,8 @@ const styles = StyleSheet.create({
     ...theme.typography.callout,
   },
   greetingBlock: {
-<<<<<<< HEAD
     paddingTop: 0,
     marginTop: 0,
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
     gap: 2,
   },
   greeting: {
@@ -213,9 +250,11 @@ const styles = StyleSheet.create({
     color: theme.colors.textPrimary,
     ...theme.typography.title1,
   },
-  emptyWrap: {
-    marginTop: theme.spacing.xl,
+  groupsList: {
     gap: theme.spacing.md,
+  },
+  emptyWrap: {
+    marginTop: theme.spacing.sm,
   },
   groupCard: {
     backgroundColor: theme.colors.card,
@@ -226,6 +265,27 @@ const styles = StyleSheet.create({
     borderBottomColor: 'rgba(0,0,0,0.4)',
     padding: theme.spacing.md,
     gap: theme.spacing.md,
+  },
+  createGroupCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  createGroupRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.md,
+    flex: 1,
+  },
+  createGroupIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: theme.colors.cardSecondary,
+    borderWidth: 1,
+    borderColor: theme.colors.borderDefault,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   groupTop: {
     flexDirection: 'row',

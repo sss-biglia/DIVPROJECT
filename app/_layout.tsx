@@ -56,7 +56,6 @@ function RootNavigator() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="onboarding" options={{ headerShown: false, animation: 'fade' }} />
         <Stack.Screen name="group/[id]" options={{ headerShown: false }} />
-<<<<<<< HEAD
         <Stack.Screen
           name="group/create"
           options={{
@@ -101,9 +100,6 @@ function RootNavigator() {
             headerBackTitle: '',
           }}
         />
-=======
-        <Stack.Screen name="group/create" options={{ headerShown: false }} />
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
         <Stack.Screen name="expense/scan" options={{ headerShown: false }} />
         <Stack.Screen name="receipt-viewer" options={{ headerShown: false }} />
         <Stack.Screen name="settings" options={{ title: 'Configuración' }} />

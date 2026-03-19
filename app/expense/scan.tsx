@@ -1,9 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { CameraView, useCameraPermissions } from 'expo-camera';
-<<<<<<< HEAD
 import * as Haptics from 'expo-haptics';
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 import * as ImageManipulator from 'expo-image-manipulator';
 import * as ImagePicker from 'expo-image-picker';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -76,10 +73,7 @@ export default function ScanExpenseScreen() {
   };
 
   const takePicture = async () => {
-<<<<<<< HEAD
     void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
     if (!cameraRef.current) {
       return;
     }
@@ -95,10 +89,7 @@ export default function ScanExpenseScreen() {
   };
 
   const pickImage = async () => {
-<<<<<<< HEAD
     void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ['images'],
@@ -116,39 +107,26 @@ export default function ScanExpenseScreen() {
 
   if (!groupsExist) {
     return (
-<<<<<<< HEAD
       <Screen includeTopInset contentContainerStyle={styles.emptyScreen}>
-=======
-      <Screen contentContainerStyle={styles.emptyScreen}>
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
         <Text style={styles.title}>Create a group first</Text>
         <Text style={styles.subtitle}>
           Receipt scanning needs a group so the expense has somewhere to live.
         </Text>
-<<<<<<< HEAD
         <PrimaryButton label="Go to Groups" onPress={() => {
           void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           router.replace('/');
         }} />
-=======
-        <PrimaryButton label="Go to Groups" onPress={() => router.replace('/')} />
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
       </Screen>
     );
   }
 
   if (!permission?.granted) {
     return (
-<<<<<<< HEAD
       <Screen includeTopInset contentContainerStyle={styles.permissionScreen}>
-=======
-      <Screen contentContainerStyle={styles.permissionScreen}>
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
         <Text style={styles.title}>Camera access needed</Text>
         <Text style={styles.subtitle}>
           SplitSnap uses the camera to capture receipts from the moment they happen.
         </Text>
-<<<<<<< HEAD
         <PrimaryButton label="Allow Camera" onPress={() => {
           void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           void requestPermission();
@@ -157,10 +135,6 @@ export default function ScanExpenseScreen() {
           label="Pick from Library Instead"
           onPress={() => void pickImage()}
         />
-=======
-        <PrimaryButton label="Allow Camera" onPress={() => void requestPermission()} />
-        <GhostButton label="Pick from Library Instead" onPress={() => void pickImage()} />
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
       </Screen>
     );
   }
@@ -170,7 +144,6 @@ export default function ScanExpenseScreen() {
       <CameraView ref={cameraRef} style={styles.camera} facing="back" />
 
       <View style={styles.overlayTop}>
-<<<<<<< HEAD
         <Pressable
           onPress={() => {
             void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -178,9 +151,6 @@ export default function ScanExpenseScreen() {
           }}
           style={styles.iconButton}
         >
-=======
-        <Pressable onPress={() => router.back()} style={styles.iconButton}>
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
           <Ionicons color={theme.colors.textPrimary} name="chevron-back" size={22} />
         </Pressable>
       </View>

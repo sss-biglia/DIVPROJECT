@@ -86,9 +86,13 @@ const applySettlementToNet = (
   );
 };
 
+<<<<<<< HEAD
 export const getMemberBalances = (group: any): MemberBalance[] => {
   if (!group || !group.members) return [];
 
+=======
+export const getMemberBalances = (group: Group): MemberBalance[] => {
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   const netByMemberId: Record<string, number> = {};
   const paidByMemberId: Record<string, number> = {};
   const owedByMemberId: Record<string, number> = {};
@@ -158,9 +162,13 @@ const buildUsdBuckets = (group: Group) => {
   return buckets;
 };
 
+<<<<<<< HEAD
 export const simplifySettlements = (group: any): SettlementSuggestion[] => {
   if (!group || !group.members) return [];
 
+=======
+export const simplifySettlements = (group: Group): SettlementSuggestion[] => {
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   const balances = getMemberBalances(group)
     .map((entry) => ({ ...entry, remaining: entry.net }))
     .sort((left, right) => left.remaining - right.remaining);

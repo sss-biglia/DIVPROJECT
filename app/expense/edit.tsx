@@ -52,7 +52,10 @@ export default function EditExpenseScreen() {
       : null;
 
   const onCurrencyChange = async (nextCurrency: 'ARS' | 'USD') => {
+<<<<<<< HEAD
     void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+=======
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
     setCurrency(nextCurrency);
 
     if (nextCurrency === 'USD') {
@@ -111,7 +114,11 @@ export default function EditExpenseScreen() {
             : entry
         ),
       });
+<<<<<<< HEAD
       void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+=======
+      await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
       router.replace(`/group/${group.id}`);
     } catch (error) {
       Alert.alert('Could not update expense', 'Please try again.');
@@ -127,10 +134,14 @@ export default function EditExpenseScreen() {
           title="Expense not found"
           message="This expense may have been removed already."
         />
+<<<<<<< HEAD
         <PrimaryButton label="Back to Groups" onPress={() => {
           void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           router.replace('/');
         }} />
+=======
+        <PrimaryButton label="Back to Groups" onPress={() => router.replace('/')} />
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
       </KeyboardScreen>
     );
   }

@@ -1,5 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
+<<<<<<< HEAD
 import * as Haptics from 'expo-haptics';
+=======
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 import { useState } from 'react';
 import {
   KeyboardAvoidingView,
@@ -53,7 +56,10 @@ export default function ProfileScreen() {
 
     try {
       setLoading(true);
+<<<<<<< HEAD
       void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+=======
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
       await saveUserProfile(nextProfile);
       setSaveMessage('Profile saved ✓');
       setTimeout(() => setSaveMessage(''), 2000);
@@ -75,10 +81,14 @@ export default function ProfileScreen() {
 
         <View style={styles.avatarSection}>
           <Pressable
+<<<<<<< HEAD
             onPress={() => {
               void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
               setShowColorPicker((current) => !current);
             }}
+=======
+            onPress={() => setShowColorPicker((current) => !current)}
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
             style={[styles.avatar, { backgroundColor: avatarColor }]}
           >
             <Text style={styles.avatarLabel}>{getInitials(name, lastName)}</Text>
@@ -89,10 +99,14 @@ export default function ProfileScreen() {
               {avatarColors.map((color) => (
                 <Pressable
                   key={color}
+<<<<<<< HEAD
                   onPress={() => {
                     void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                     setAvatarColor(color);
                   }}
+=======
+                  onPress={() => setAvatarColor(color)}
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
                   style={[
                     styles.colorSwatch,
                     { backgroundColor: color },

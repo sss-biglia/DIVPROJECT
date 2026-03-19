@@ -55,12 +55,18 @@ export const Screen = ({
   children,
   scrollable = false,
   contentContainerStyle,
+<<<<<<< HEAD
   includeTopInset = false,
+=======
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 }: {
   children: ReactNode;
   scrollable?: boolean;
   contentContainerStyle?: StyleProp<ViewStyle>;
+<<<<<<< HEAD
   includeTopInset?: boolean;
+=======
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 }) => {
   const content = scrollable ? (
     <ScrollView
@@ -73,6 +79,7 @@ export const Screen = ({
     <View style={[styles.fill, contentContainerStyle]}>{children}</View>
   );
 
+<<<<<<< HEAD
   return (
     <SafeAreaView
       edges={includeTopInset ? ['top', 'left', 'right'] : ['left', 'right']}
@@ -81,11 +88,15 @@ export const Screen = ({
       {content}
     </SafeAreaView>
   );
+=======
+  return <SafeAreaView style={styles.screen}>{content}</SafeAreaView>;
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 };
 
 export const KeyboardScreen = ({
   children,
   contentContainerStyle,
+<<<<<<< HEAD
   includeTopInset = false,
 }: {
   children: ReactNode;
@@ -96,6 +107,13 @@ export const KeyboardScreen = ({
     edges={includeTopInset ? ['top', 'left', 'right'] : ['left', 'right']}
     style={styles.screen}
   >
+=======
+}: {
+  children: ReactNode;
+  contentContainerStyle?: StyleProp<ViewStyle>;
+}) => (
+  <SafeAreaView style={styles.screen}>
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.fill}

@@ -50,8 +50,12 @@
           "photosPermission": "SplitSnap needs photo library access to import receipts."
         }
       ],
+<<<<<<< HEAD
       "expo-image",
       "expo-audio"
+=======
+      "expo-image"
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
     ]
   }
 }

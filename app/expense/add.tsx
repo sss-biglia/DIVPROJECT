@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
 import { Alert, StyleSheet, Text, TextInput, View } from 'react-native';
+=======
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Ionicons } from '@expo/vector-icons';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useEffect, useRef, useState } from 'react';
+import { Alert, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 
 import { CategoryPicker } from '../../components/CategoryPicker';
 import { CurrencyToggle } from '../../components/CurrencyToggle';
@@ -20,6 +28,11 @@ import { convertUSDtoARS, fetchDolarBlue, formatARS } from '../../services/dolar
 import { ExpenseDraft } from '../../types';
 import { normalizeExpenseCategory } from '../../utils/expense';
 
+<<<<<<< HEAD
+=======
+const MIC_TOOLTIP_KEY = 'mic_tooltip_shown';
+
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 export default function AddExpenseScreen() {
   const { groupId } = useLocalSearchParams<{ groupId?: string }>();
   const router = useRouter();
@@ -32,8 +45,24 @@ export default function AddExpenseScreen() {
   const [category, setCategory] = useState(normalizeExpenseCategory());
   const [localDolarRate, setLocalDolarRate] = useState<number | undefined>(dolarRate?.venta);
   const [loading, setLoading] = useState(false);
+<<<<<<< HEAD
   const inputRef = useRef<TextInput | null>(null);
 
+=======
+  const [showMicTooltip, setShowMicTooltip] = useState(false);
+  const [micTooltipSeen, setMicTooltipSeen] = useState(true);
+  const inputRef = useRef<TextInput | null>(null);
+
+  useEffect(() => {
+    const loadTooltipState = async () => {
+      const stored = await AsyncStorage.getItem(MIC_TOOLTIP_KEY);
+      setMicTooltipSeen(stored === 'true');
+    };
+
+    void loadTooltipState();
+  }, []);
+
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   const groupsExist = groups.length > 0;
 
   const goToConfirm = (draft: ExpenseDraft) => {
@@ -42,20 +71,32 @@ export default function AddExpenseScreen() {
   };
 
   const onParse = async () => {
+<<<<<<< HEAD
     const text = naturalText;
     if (!text.trim()) {
+=======
+    if (!naturalText.trim()) {
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
       Alert.alert('Describe el gasto', 'Escribí algo como "Gasté 120 en el súper".');
       return;
     }
 
     try {
       setLoading(true);
+<<<<<<< HEAD
       const extracted = await parseExpenseText(text.trim());
+=======
+      const extracted = await parseExpenseText(naturalText.trim());
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 
       goToConfirm({
         amount: extracted.amount ?? 0,
         currency: extracted.currency || 'ARS',
+<<<<<<< HEAD
         description: extracted.description || text.trim(),
+=======
+        description: extracted.description || naturalText.trim(),
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
         date: new Date().toISOString(),
         source: 'text',
         groupId,
@@ -117,6 +158,20 @@ export default function AddExpenseScreen() {
     }
   };
 
+<<<<<<< HEAD
+=======
+  const onPressMic = async () => {
+    inputRef.current?.focus();
+
+    if (!micTooltipSeen) {
+      setShowMicTooltip(true);
+      setMicTooltipSeen(true);
+      await AsyncStorage.setItem(MIC_TOOLTIP_KEY, 'true');
+      setTimeout(() => setShowMicTooltip(false), 3000);
+    }
+  };
+
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   const convertedPreview =
     currency === 'USD' && localDolarRate && Number(amount) > 0
       ? formatARS(
@@ -153,6 +208,7 @@ export default function AddExpenseScreen() {
 
       {entryMode === 'ai' ? (
         <AppCard>
+<<<<<<< HEAD
           <Field
             ref={inputRef}
             label="¿En qué gastaste?"
@@ -164,6 +220,34 @@ export default function AddExpenseScreen() {
             textAlignVertical="top"
             value={naturalText}
           />
+=======
+          <View style={styles.aiRow}>
+            <View style={styles.aiInputWrap}>
+              <Field
+                ref={inputRef}
+                label="¿En qué gastaste?"
+                multiline
+                numberOfLines={4}
+                onChangeText={setNaturalText}
+                placeholder="Gasté 120 en el supermercado"
+                style={styles.multilineInput}
+                textAlignVertical="top"
+                value={naturalText}
+              />
+            </View>
+
+            <View style={styles.micWrap}>
+              <Pressable onPress={() => void onPressMic()} style={styles.micButton}>
+                <Ionicons name="mic-outline" size={20} color={theme.colors.textPrimary} />
+              </Pressable>
+              {showMicTooltip ? (
+                <View style={styles.tooltip}>
+                  <Text style={styles.tooltipText}>Tocá el micrófono del teclado para dictar</Text>
+                </View>
+              ) : null}
+            </View>
+          </View>
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 
           <PrimaryButton label="Parsear con IA" loading={loading} onPress={() => void onParse()} />
         </AppCard>
@@ -208,6 +292,46 @@ const styles = StyleSheet.create({
     gap: theme.spacing.sm,
     flexWrap: 'wrap',
   },
+<<<<<<< HEAD
+=======
+  aiRow: {
+    flexDirection: 'row',
+    gap: theme.spacing.sm,
+    alignItems: 'flex-start',
+  },
+  aiInputWrap: {
+    flex: 1,
+  },
+  micWrap: {
+    alignItems: 'center',
+    gap: 8,
+    paddingTop: 28,
+  },
+  micButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.06)',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.08)',
+  },
+  tooltip: {
+    maxWidth: 180,
+    borderRadius: theme.radius.full,
+    backgroundColor: theme.colors.card,
+    borderWidth: 1,
+    borderColor: theme.colors.borderDefault,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+  },
+  tooltipText: {
+    color: theme.colors.textSecondary,
+    fontSize: 12,
+    textAlign: 'center',
+  },
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   multilineInput: {
     minHeight: 140,
   },

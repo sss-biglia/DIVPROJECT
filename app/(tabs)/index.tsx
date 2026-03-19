@@ -1,5 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
+<<<<<<< HEAD
 import * as Haptics from 'expo-haptics';
+=======
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 import { useRouter } from 'expo-router';
 import { useRef } from 'react';
 import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
@@ -138,10 +141,14 @@ export default function GroupsScreen() {
       {groups.length === 0 ? (
         <View style={styles.emptyWrap}>
           <EmptyState icon="💸" title="No hay grupos todavía" message="Creá tu primer grupo para empezar" />
+<<<<<<< HEAD
           <PrimaryButton label="Crear grupo" onPress={() => {
             void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
             router.push('/group/create');
           }} />
+=======
+          <PrimaryButton label="Crear grupo" onPress={() => router.push('/group/create')} />
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
         </View>
       ) : (
         groups.map((group) => (
@@ -157,10 +164,14 @@ export default function GroupsScreen() {
                 ? currentUserName
                 : null
             }
+<<<<<<< HEAD
             onPress={() => {
               void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
               router.push(`/group/${group.id}`);
             }}
+=======
+            onPress={() => router.push(`/group/${group.id}`)}
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
           />
         ))
       )}
@@ -170,7 +181,10 @@ export default function GroupsScreen() {
 
 const styles = StyleSheet.create({
   content: {
+<<<<<<< HEAD
     paddingTop: 0,
+=======
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
     paddingBottom: 120,
     gap: theme.spacing.md,
   },
@@ -184,8 +198,11 @@ const styles = StyleSheet.create({
     ...theme.typography.callout,
   },
   greetingBlock: {
+<<<<<<< HEAD
     paddingTop: 0,
     marginTop: 0,
+=======
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
     gap: 2,
   },
   greeting: {

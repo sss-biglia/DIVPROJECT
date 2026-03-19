@@ -1,7 +1,10 @@
 import { Ionicons } from '@expo/vector-icons';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { BlurView } from 'expo-blur';
+<<<<<<< HEAD
 import { LinearGradient } from 'expo-linear-gradient';
+=======
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 import { useRef } from 'react';
 import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
 
@@ -56,14 +59,22 @@ export function CustomTabBar({
         style={styles.tabButton}
       >
         <Ionicons
+<<<<<<< HEAD
           color={isFocused ? theme.colors.textPrimary : '#8E8E93'}
+=======
+          color={isFocused ? theme.colors.textPrimary : theme.colors.textTertiary}
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
           name={iconName}
           size={22}
         />
         <Text
           style={[
             styles.tabLabel,
+<<<<<<< HEAD
             { color: isFocused ? theme.colors.textPrimary : '#8E8E93' },
+=======
+            { color: isFocused ? theme.colors.textPrimary : theme.colors.textTertiary },
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
           ]}
         >
           {label}
@@ -90,6 +101,7 @@ export function CustomTabBar({
                   animatePlus();
                   onPressAdd();
                 }}
+<<<<<<< HEAD
                 style={styles.plusOuter}
               >
                 <LinearGradient
@@ -139,6 +151,11 @@ export function CustomTabBar({
                     <Text style={styles.plusIcon}>+</Text>
                   </LinearGradient>
                 </LinearGradient>
+=======
+                style={styles.plusButton}
+              >
+                <Ionicons color={theme.colors.background} name="add" size={30} />
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
               </Pressable>
             </Animated.View>
           </View>
@@ -160,7 +177,11 @@ const styles = StyleSheet.create({
   },
   blur: {
     borderTopWidth: 1,
+<<<<<<< HEAD
     borderTopColor: theme.colors.background,
+=======
+    borderTopColor: 'rgba(255,255,255,0.04)',
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   },
   inner: {
     height: 72,
@@ -189,6 +210,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: -20,
   },
+<<<<<<< HEAD
   plusOuter: {
     width: 58,
     height: 58,
@@ -221,5 +243,19 @@ const styles = StyleSheet.create({
     color: 'rgba(28,32,40,0.78)',
     marginTop: -1,
     zIndex: 1,
+=======
+  plusButton: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: theme.colors.textPrimary,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.5,
+    shadowRadius: 12,
+    elevation: 12,
+>>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   },
 });

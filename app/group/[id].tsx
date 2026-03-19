@@ -7,13 +7,9 @@ import {
   Animated,
   FlatList,
   Image,
-<<<<<<< HEAD
   Modal,
   Pressable,
   ScrollView,
-=======
-  Pressable,
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   SectionList,
   Share,
   StyleSheet,
@@ -21,22 +17,14 @@ import {
   View,
 } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
-<<<<<<< HEAD
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 
 import { AddMemberSheet } from '../../components/AddMemberSheet';
 import { MemberAvatar } from '../../components/MemberAvatar';
 import { MPPaymentSheet } from '../../components/MPPaymentSheet';
-<<<<<<< HEAD
 import { QuickAddSheet } from '../../components/QuickAddSheet';
 import { TickerNumber } from '../../components/TickerNumber';
 import { Badge, EmptyState, PrimaryButton } from '../../components/ui';
-=======
-import { TickerNumber } from '../../components/TickerNumber';
-import { Badge, EmptyState, PrimaryButton, Screen } from '../../components/ui';
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 import { theme } from '../../constants/theme';
 import { useApp } from '../../context/AppProvider';
 import {
@@ -110,10 +98,7 @@ const getDateLabel = (value: string) =>
 export default function GroupDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
-<<<<<<< HEAD
   const insets = useSafeAreaInsets();
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   const { groups, removeGroup, saveGroup, addSettlement, profile, dolarRate, refreshDolarRate } =
     useApp();
   const [viewMode, setViewMode] = useState<ViewMode>('expenses');
@@ -126,22 +111,15 @@ export default function GroupDetailScreen() {
     mpPaymentLink?: string;
     originalAmountUSD?: number;
   } | null>(null);
-<<<<<<< HEAD
   const [quickAddVisible, setQuickAddVisible] = useState(false);
   const [addMemberVisible, setAddMemberVisible] = useState(false);
   const [showAllMembers, setShowAllMembers] = useState(false);
-=======
-  const [addMemberVisible, setAddMemberVisible] = useState(false);
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   const [speedDialOpen, setSpeedDialOpen] = useState(false);
   const speedDialProgress = useRef(new Animated.Value(0)).current;
   const fabScale = useRef(new Animated.Value(1)).current;
 
   const group = groups.find((entry) => entry.id === id);
-<<<<<<< HEAD
 
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   const expenseSections = useMemo(
     () => buildExpenseSections(group?.expenses ?? []),
     [group?.expenses]
@@ -184,7 +162,6 @@ export default function GroupDetailScreen() {
     ]).start();
   };
 
-<<<<<<< HEAD
   const balances = group ? getMemberBalances(group) : [];
   const membersWithBalance = useMemo(
     () =>
@@ -222,18 +199,6 @@ export default function GroupDetailScreen() {
       }),
     [membersWithBalance]
   );
-=======
-  if (!group) {
-    return (
-      <Screen contentContainerStyle={styles.missingWrap}>
-        <EmptyState title="Grupo no encontrado" message="Puede que este grupo ya no exista." />
-        <PrimaryButton label="Volver" onPress={() => router.replace('/')} />
-      </Screen>
-    );
-  }
-
-  const balances = getMemberBalances(group);
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   const settlementSuggestions = simplifySettlements(group);
   const settledRecords = [...(group.settlements ?? [])].sort((left, right) =>
     right.date.localeCompare(left.date)
@@ -242,52 +207,23 @@ export default function GroupDetailScreen() {
   const totalARS = getGroupTotalSpent(group);
   const hasUSD = hasUSDExpenses(group);
 
-<<<<<<< HEAD
   const onDeleteGroup = () => {
-=======
-  const onDeleteGroup = async () => {
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
     Alert.alert('¿Eliminar grupo?', 'Esto borra el grupo y todos sus gastos guardados.', [
       { text: 'Cancelar', style: 'cancel' },
       {
         text: 'Eliminar',
         style: 'destructive',
         onPress: () => {
-<<<<<<< HEAD
           void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
           router.replace('/');
           setTimeout(() => removeGroup(group.id), 500); // delete AFTER navigation completes
-=======
-          void removeGroup(group.id).then(() => router.replace('/'));
-        },
-      },
-    ]);
-  };
-
-  const deleteExpense = async (expenseId: string) => {
-    await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    Alert.alert('Eliminar gasto', '¿Querés borrar este gasto?', [
-      { text: 'Cancelar', style: 'cancel' },
-      {
-        text: 'Eliminar',
-        style: 'destructive',
-        onPress: () => {
-          void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
-          void saveGroup({
-            ...group,
-            expenses: group.expenses.filter((expense) => expense.id !== expenseId),
-          });
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
         },
       },
     ]);
   };
 
   const addMember = async (name: string, color: string) => {
-<<<<<<< HEAD
     void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
     const nextMember: Member = {
       id: createId(),
       name,
@@ -318,11 +254,7 @@ export default function GroupDetailScreen() {
       };
 
       await addSettlement(group.id, settlement);
-<<<<<<< HEAD
       void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-=======
-      await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
       setSelectedDebt(null);
     } catch (error) {
       Alert.alert('No pudimos saldar', 'Probá de nuevo en un momento.');
@@ -330,10 +262,7 @@ export default function GroupDetailScreen() {
   };
 
   const onShareSummary = async () => {
-<<<<<<< HEAD
     void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
     const summary = generateSummary(group, dolarRate?.venta);
     await Share.share({ message: summary });
   };
@@ -383,14 +312,10 @@ export default function GroupDetailScreen() {
                 ) : null}
               </View>
               <Pressable
-<<<<<<< HEAD
                 onPress={() => {
                   void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                   router.push(`/expense/edit?groupId=${group.id}&expenseId=${item.id}`);
                 }}
-=======
-                onPress={() => router.push(`/expense/edit?groupId=${group.id}&expenseId=${item.id}`)}
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
                 style={styles.editButton}
               >
                 <Ionicons color="rgba(255,255,255,0.3)" name="pencil" size={14} />
@@ -404,7 +329,6 @@ export default function GroupDetailScreen() {
   };
 
   return (
-<<<<<<< HEAD
     <View style={[styles.screen, { paddingTop: insets.top }]}>
       <ScrollView
         contentContainerStyle={styles.screenContent}
@@ -418,22 +342,13 @@ export default function GroupDetailScreen() {
           }}
           style={styles.iconButton}
         >
-=======
-    <Screen contentContainerStyle={styles.screenContent}>
-      <View style={styles.headerRow}>
-        <Pressable onPress={() => router.back()} style={styles.iconButton}>
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
           <Ionicons color={theme.colors.textPrimary} name="chevron-back" size={22} />
         </Pressable>
         <View style={styles.headerActions}>
           <Pressable onPress={() => void onShareSummary()} style={styles.iconButton}>
             <Ionicons color={theme.colors.textPrimary} name="share-outline" size={18} />
           </Pressable>
-<<<<<<< HEAD
           <Pressable onPress={onDeleteGroup} style={styles.iconButton}>
-=======
-          <Pressable onPress={() => void onDeleteGroup()} style={styles.iconButton}>
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
             <Ionicons color={theme.colors.danger} name="trash-outline" size={18} />
           </Pressable>
         </View>
@@ -453,7 +368,6 @@ export default function GroupDetailScreen() {
       </View>
 
       <View style={styles.membersCard}>
-<<<<<<< HEAD
         <Text style={styles.sectionTag}>PARTICIPANTES</Text>
         <View style={styles.membersGrid}>
           {visibleMembers.map((member) => (
@@ -502,44 +416,11 @@ export default function GroupDetailScreen() {
         >
           <Text style={styles.addMemberBarLabel}>+ Agregar participante</Text>
         </Pressable>
-=======
-        <View style={styles.membersRow}>
-          {group.members.map((member) => {
-            const memberBalance = balances.find((entry) => entry.member.id === member.id)?.net ?? 0;
-
-            return (
-              <View key={member.id} style={styles.memberItem}>
-                <MemberAvatar
-                  name={member.name}
-                  color={member.color}
-                  size="md"
-                  isCurrentUser={isCurrentUserName(profile, member.name)}
-                />
-                <Text style={styles.memberLabel}>{member.name}</Text>
-                <TickerNumber
-                  value={Math.abs(memberBalance)}
-                  formatFn={formatARS}
-                  style={[
-                    styles.memberBalance,
-                    memberBalance >= 0 ? styles.memberBalancePositive : styles.memberBalanceNegative,
-                  ]}
-                />
-                {isCurrentUserName(profile, member.name) ? <Badge label="You" tone="accent" /> : null}
-              </View>
-            );
-          })}
-
-          <Pressable onPress={() => setAddMemberVisible(true)} style={styles.addMemberButton}>
-            <Ionicons color={theme.colors.textSecondary} name="add" size={18} />
-          </Pressable>
-        </View>
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
       </View>
 
       <View style={styles.balanceCard}>
         <View style={styles.balanceHeader}>
           <Text style={styles.sectionTag}>TE DEBEN / DEBÉS</Text>
-<<<<<<< HEAD
           <Pressable
             onPress={() => {
               void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -547,9 +428,6 @@ export default function GroupDetailScreen() {
             }}
             style={styles.ratePill}
           >
-=======
-          <Pressable onPress={() => void refreshDolarRate()} style={styles.ratePill}>
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
             <Text style={styles.ratePillLabel}>Blue hoy: ${Math.round(dolarRate?.venta ?? 0)}</Text>
           </Pressable>
         </View>
@@ -581,10 +459,7 @@ export default function GroupDetailScreen() {
                   label="Pagar 💸"
                   variant="pay"
                   onPress={() => {
-<<<<<<< HEAD
                     void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
                     const paymentDetails = getPaymentDetailsForMember(profile, settlement.to.name);
 
                     setSelectedDebt({
@@ -605,14 +480,10 @@ export default function GroupDetailScreen() {
 
       <View style={styles.segmentWrap}>
         <Pressable
-<<<<<<< HEAD
           onPress={() => {
             void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
             setViewMode('expenses');
           }}
-=======
-          onPress={() => setViewMode('expenses')}
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
           style={[styles.segmentButton, viewMode === 'expenses' && styles.segmentButtonActive]}
         >
           <Text style={[styles.segmentLabel, viewMode === 'expenses' && styles.segmentLabelActive]}>
@@ -620,14 +491,10 @@ export default function GroupDetailScreen() {
           </Text>
         </Pressable>
         <Pressable
-<<<<<<< HEAD
           onPress={() => {
             void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
             setViewMode('settled');
           }}
-=======
-          onPress={() => setViewMode('settled')}
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
           style={[styles.segmentButton, viewMode === 'settled' && styles.segmentButtonActive]}
         >
           <Text style={[styles.segmentLabel, viewMode === 'settled' && styles.segmentLabelActive]}>
@@ -689,14 +556,10 @@ export default function GroupDetailScreen() {
             contentContainerStyle={styles.receiptsList}
             renderItem={({ item }) => (
               <Pressable
-<<<<<<< HEAD
                 onPress={() => {
                   void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                   router.push(`/receipt-viewer?groupId=${group.id}&expenseId=${item.id}`);
                 }}
-=======
-                onPress={() => router.push(`/receipt-viewer?groupId=${group.id}&expenseId=${item.id}`)}
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
                 style={styles.receiptThumb}
               >
                 {item.receiptImageUri ? <Image source={{ uri: item.receiptImageUri }} style={styles.receiptImage} /> : null}
@@ -705,7 +568,6 @@ export default function GroupDetailScreen() {
           />
         </View>
       ) : null}
-<<<<<<< HEAD
       </ScrollView>
 
       {speedDialOpen ? (
@@ -717,10 +579,6 @@ export default function GroupDetailScreen() {
           }}
         />
       ) : null}
-=======
-
-      {speedDialOpen ? <Pressable style={styles.overlay} onPress={() => toggleSpeedDial(false)} /> : null}
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 
       <Animated.View
         style={[
@@ -741,10 +599,7 @@ export default function GroupDetailScreen() {
       >
         <Pressable
           onPress={() => {
-<<<<<<< HEAD
             void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
             toggleSpeedDial(false);
             router.push(`/expense/scan?groupId=${group.id}`);
           }}
@@ -773,10 +628,7 @@ export default function GroupDetailScreen() {
       >
         <Pressable
           onPress={() => {
-<<<<<<< HEAD
             void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
             toggleSpeedDial(false);
             router.push(`/expense/add?groupId=${group.id}`);
           }}
@@ -786,7 +638,6 @@ export default function GroupDetailScreen() {
         </Pressable>
       </Animated.View>
 
-<<<<<<< HEAD
       <View style={styles.fabWrap}>
         <Animated.View style={{ transform: [{ scale: fabScale }] }}>
           <Pressable
@@ -801,24 +652,6 @@ export default function GroupDetailScreen() {
           </Pressable>
         </Animated.View>
       </View>
-=======
-      <Animated.View style={[styles.fabWrap, { transform: [{ scale: fabScale }] }]}>
-        <Pressable
-          onLongPress={() => toggleSpeedDial(!speedDialOpen)}
-          onPress={() => {
-            animateFab();
-            if (speedDialOpen) {
-              toggleSpeedDial(false);
-              return;
-            }
-            router.push(`/expense/add?groupId=${group.id}`);
-          }}
-          style={styles.fab}
-        >
-          <Ionicons color={theme.colors.background} name="add" size={28} />
-        </Pressable>
-      </Animated.View>
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 
       <AddMemberSheet
         visible={addMemberVisible}
@@ -827,7 +660,6 @@ export default function GroupDetailScreen() {
         onAddMember={(name, color) => void addMember(name, color)}
       />
 
-<<<<<<< HEAD
       <Modal visible={showAllMembers} transparent animationType="slide">
         <View style={styles.modalBackdrop}>
           <View style={styles.modalContainer}>
@@ -885,8 +717,6 @@ export default function GroupDetailScreen() {
         </View>
       </Modal>
 
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
       <MPPaymentSheet
         visible={!!selectedDebt}
         onClose={() => setSelectedDebt(null)}
@@ -898,7 +728,6 @@ export default function GroupDetailScreen() {
         mpPaymentLink={selectedDebt?.mpPaymentLink}
         originalAmountUSD={selectedDebt?.originalAmountUSD}
       />
-<<<<<<< HEAD
       <QuickAddSheet
         visible={quickAddVisible}
         groups={groups}
@@ -913,20 +742,14 @@ export default function GroupDetailScreen() {
         }}
       />
     </View>
-=======
-    </Screen>
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   );
 }
 
 const styles = StyleSheet.create({
-<<<<<<< HEAD
   screen: {
     flex: 1,
     backgroundColor: theme.colors.background,
   },
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   screenContent: {
     paddingHorizontal: theme.spacing.md,
     paddingVertical: theme.spacing.md,
@@ -1012,7 +835,6 @@ const styles = StyleSheet.create({
   membersRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-<<<<<<< HEAD
     justifyContent: 'flex-start',
     gap: 12,
   },
@@ -1131,40 +953,6 @@ const styles = StyleSheet.create({
   modalMemberBalance: {
     ...theme.typography.callout,
     fontWeight: '700',
-=======
-    gap: theme.spacing.sm,
-    alignItems: 'center',
-  },
-  memberItem: {
-    minWidth: 88,
-    alignItems: 'center',
-    gap: 6,
-  },
-  memberLabel: {
-    color: theme.colors.textPrimary,
-    ...theme.typography.footnote,
-    textAlign: 'center',
-  },
-  memberBalance: {
-    fontSize: 11,
-    fontWeight: '700',
-  },
-  memberBalancePositive: {
-    color: theme.colors.accent,
-  },
-  memberBalanceNegative: {
-    color: theme.colors.textPrimary,
-  },
-  addMemberButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderStyle: 'dashed',
-    borderColor: 'rgba(255,255,255,0.15)',
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   },
   balanceCard: {
     backgroundColor: theme.colors.card,
@@ -1255,20 +1043,12 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.cardSecondary,
   },
   segmentLabel: {
-<<<<<<< HEAD
     color: '#8E8E93',
-=======
-    color: theme.colors.textSecondary,
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
     ...theme.typography.footnote,
     fontWeight: '600',
   },
   segmentLabelActive: {
-<<<<<<< HEAD
     color: '#F5F5F0',
-=======
-    color: theme.colors.textPrimary,
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   },
   sectionListContent: {
     gap: theme.spacing.sm,
@@ -1406,7 +1186,6 @@ const styles = StyleSheet.create({
   },
   fabWrap: {
     position: 'absolute',
-<<<<<<< HEAD
     right: 24,
     bottom: 32,
     zIndex: 100,
@@ -1423,19 +1202,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 12,
     elevation: 12,
-=======
-    right: theme.spacing.md,
-    bottom: 28,
-  },
-  fab: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: theme.colors.textPrimary,
-    ...theme.shadows.floating,
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
   },
   speedDialOption: {
     position: 'absolute',

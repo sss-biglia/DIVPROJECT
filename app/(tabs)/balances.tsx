@@ -73,11 +73,7 @@ export default function BalancesScreen() {
       };
 
       await addSettlement(selectedDebt.groupId, settlement);
-<<<<<<< HEAD
       void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-=======
-      await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
       setSelectedDebt(null);
     } catch (error) {
       Alert.alert('No pudimos saldar', 'Probá de nuevo.');
@@ -168,10 +164,7 @@ export default function BalancesScreen() {
                       <TickerNumber value={settlement.amount} formatFn={formatARS} style={styles.debtAmount} />
                       <Pressable
                         onPress={() => {
-<<<<<<< HEAD
                           void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
                           const paymentDetails = getPaymentDetailsForMember(profile, settlement.to.name);
 
                           setSelectedDebt({
@@ -196,7 +189,6 @@ export default function BalancesScreen() {
               )}
 
               <Pressable
-<<<<<<< HEAD
                 onPress={() => {
                   void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                   setExpandedGroups((current) => ({
@@ -204,14 +196,6 @@ export default function BalancesScreen() {
                     [group.id]: !current[group.id],
                   }));
                 }}
-=======
-                onPress={() =>
-                  setExpandedGroups((current) => ({
-                    ...current,
-                    [group.id]: !current[group.id],
-                  }))
-                }
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
                 style={styles.collapsibleHeader}
               >
                 <Text style={styles.collapsibleTitle}>Saldados ({settledRecords.length})</Text>

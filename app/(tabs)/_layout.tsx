@@ -1,18 +1,10 @@
-import { Ionicons } from '@expo/vector-icons';
 import { Tabs, useRouter } from 'expo-router';
-<<<<<<< HEAD
 import * as Haptics from 'expo-haptics';
 import { useRef, useState } from 'react';
 import { Animated, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { CustomTabBar } from '../../components/CustomTabBar';
 import { IntroScreen } from '../../components/IntroScreen';
-=======
-import { useState } from 'react';
-import { Pressable } from 'react-native';
-
-import { CustomTabBar } from '../../components/CustomTabBar';
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
 import { ProfileSheet } from '../../components/ProfileSheet';
 import { QuickAddSheet } from '../../components/QuickAddSheet';
 import { theme } from '../../constants/theme';
@@ -25,7 +17,6 @@ export default function TabsLayout() {
   const { groups, profile } = useApp();
   const [sheetVisible, setSheetVisible] = useState(false);
   const [profileSheetVisible, setProfileSheetVisible] = useState(false);
-<<<<<<< HEAD
   const [showNoGroupsModal, setShowNoGroupsModal] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const [introVisible, setIntroVisible] = useState(true);
@@ -40,31 +31,6 @@ export default function TabsLayout() {
     </View>
   );
 
-  const createGroupButton = (
-    <Pressable
-      onPress={() => {
-        void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-        router.push('/group/create');
-      }}
-      style={{ marginLeft: 16 }}
-    >
-=======
-
-  const profileButton = (
-    <ProfileHeaderButton
-      initials={getProfileInitials(profile)}
-      onPress={() => setProfileSheetVisible(true)}
-    />
-  );
-
-  const createGroupButton = (
-    <Pressable onPress={() => router.push('/group/create')} style={{ marginLeft: 8 }}>
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
-      <Ionicons color={theme.colors.textPrimary} name="add" size={24} />
-    </Pressable>
-  );
-
-<<<<<<< HEAD
   const handleOpenAddExpense = () => {
     void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     if (!groups || groups.length === 0) {
@@ -90,19 +56,11 @@ export default function TabsLayout() {
     <View style={{ flex: 1 }}>
       {/* Main app always rendered underneath */}
       <>
-=======
-  return (
-    <>
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
       <Tabs
         tabBar={(props) => (
           <CustomTabBar
             {...props}
-<<<<<<< HEAD
             onPressAdd={handleOpenAddExpense}
-=======
-            onPressAdd={() => setSheetVisible(true)}
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
           />
         )}
         screenOptions={{
@@ -117,7 +75,7 @@ export default function TabsLayout() {
           name="index"
           options={{
             title: 'Grupos',
-            headerLeft: () => createGroupButton,
+            headerLeft: () => null,
           }}
         />
         <Tabs.Screen
@@ -136,10 +94,7 @@ export default function TabsLayout() {
         groups={groups}
         onClose={() => setSheetVisible(false)}
         onSelectAction={(groupId, action) => {
-<<<<<<< HEAD
           void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-=======
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31
           setSheetVisible(false);
           router.push(
             action === 'scan'
@@ -153,7 +108,6 @@ export default function TabsLayout() {
         visible={profileSheetVisible}
         onClose={() => setProfileSheetVisible(false)}
       />
-<<<<<<< HEAD
 
       <Modal
         visible={showNoGroupsModal}
@@ -240,8 +194,3 @@ const styles = StyleSheet.create({
   modalButtonLabel: { color: theme.colors.textPrimary, fontWeight: '700', fontSize: 15 },
   modalCancel: { color: theme.colors.textSecondary, fontSize: 13 },
 });
-=======
-    </>
-  );
-}
->>>>>>> e56c373a723b1cf071a74a2ae4778af685b4ec31

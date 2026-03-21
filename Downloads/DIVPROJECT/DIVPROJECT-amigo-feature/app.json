@@ -1,0 +1,61 @@
+{
+  "expo": {
+    "name": "SplitSnap",
+    "slug": "SplitSnap",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "splitsnap",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0A0A0A"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.santiago.divapp",
+      "infoPlist": {
+        "NSCameraUsageDescription": "SplitSnap usa la camara para escanear tickets.",
+        "NSPhotoLibraryUsageDescription": "SplitSnap usa tu fototeca para importar imagenes de tickets.",
+        "LSApplicationQueriesSchemes": [
+          "mercadopago"
+        ]
+      }
+    },
+    "android": {
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_MEDIA_IMAGES"
+      ],
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "SplitSnap necesita acceso a la camara para escanear tickets."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "SplitSnap necesita acceso a la fototeca para importar tickets."
+        }
+      ],
+      "expo-image",
+      "expo-build-properties"
+    ]
+  }
+}
